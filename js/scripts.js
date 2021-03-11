@@ -1,4 +1,4 @@
 /* console.log() & document.write() */
 alert('Hello world');
-let favoriteFood = sushi;
+let favoriteFood = 'sushi';
 document.write(favoriteFood);
