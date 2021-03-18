@@ -25,8 +25,8 @@ console.log(pokemonRepository.getAll());
  function showPokemon(pokemon) {
     document.write(pokemon.name + ', is ' + pokemon.height + 'm, ' + pokemon.type + '.' + '<br />');
 } 
-pokemonList.forEach(showPokemon);
-
+ 
+pokemonRepository.getAll().forEach(showPokemon)
 
 
 
