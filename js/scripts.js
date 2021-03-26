@@ -1,50 +1,45 @@
 // pokemon IIFE repository list
 let pokemonRepository = (function (){
-   let pokemonList = [
+   let repository = [
         {name: 'bulbasaur', height: '0.7', type: 'grass'},
         {name: 'charmander', height: '0.6', type: 'fire'},
         {name: 'squirtle', height: '0.5', type: 'water'}
     ];
 
         function add(pokemon) {
-            pokemonList.push(pokemon);
+            repository.push(pokemon);
         }
 
         function getAll() {
-            return pokemonList;
+            return repository;
+        }
+        function addListItem(pokemon){
+            let pokemonList = document.querySelector(".pokemon-list");
+            let listPokemon =  document.createElement("li");
+            let button = document.createElement("button");
+            //event listener
+            button.addEventListener('click', function(){
+                showDetails(pokemon);
+            }); 
+            button.innerText = pokemon.name;
+            button.classList.add("button-class");
+            listPokemon.appendChild(button);
+            pokemonList.appendChild(listPokemon);
+        }   
+        //manual addition pokemon information
+        function showDetails(pokemon){
+            console.log(pokemon);
         }
         return {
             add: add,
-            getAll: getAll
+            getAll: getAll,
+            addListItem: addListItem
         };
 })();
 
 console.log(pokemonRepository.getAll());
 
-// forEach() Loop with the declaration moved 
- function showPokemon(pokemon) {
-    document.write(pokemon.name + ', is ' + pokemon.height + 'm, ' + pokemon.type + '.' + '<br />');
-} 
- 
-pokemonRepository.getAll().forEach(showPokemon)
 
-
-
-
-
-
-
-
-/*
-//printArrayDetails funcion declaration
-function printArrayDetails(){
-    // loop to display pokemonList 
-    for (let i=0; i < pokemonList.length; i++){
-        if(pokemonList[i].height <= 0.6)
-    document.write(pokemonList[i].name + " \(height: " + pokemonList[i].height + "m\)\, " + "<br />")
-        else{
-        document.write(pokemonList[i].name + " \(height: " + pokemonList[i].height + "m\)\ " + "-Wow, that's BIG," + "<br />")
-        }
-    }
-} 
-*/
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+});
