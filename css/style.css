@@ -20,3 +20,19 @@ body{
     color: black;
     border: 2px solid green;
 }
+header{
+    background-color:white;
+}
+main{
+    background-color:green;
+    flex-grow:1;
+    height: 100%;
+    
+}
+footer{
+    background-color:red;
+    
+}
+ul{
+    list-style-type: none;
+}
