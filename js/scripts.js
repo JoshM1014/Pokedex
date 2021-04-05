@@ -78,6 +78,7 @@ pokemonRepository.loadList().then(function() {
   });
 });
 
+// Modal Function to appear
 function showModal(){
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.classList.add('is-visible')
@@ -87,12 +88,13 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
   showModal();
 })
 
-  function showModal(titel, text) {
+  function showModal(title, text) {
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
   let modal = document.createElement('div');
   modal.classList.add('modal');
-
+  modalContainer.classList.add('is-visible');
+  
   let closeButtonElement = document.createElement('button');
   closeButtonElement.classList.add('modal-close');
   closeButtonElement.innerText='close';
@@ -108,9 +110,34 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
     modal.appendChild(contentElement);
     modalContainer.appendChild(modal);
 
-    modalContainer.classList.add('is-visible');
+    
+
+  /*  let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+    
+    //close modal with escape button
+    window.addEventListener('keydown', (e) =>{
+      let modalContainer = document.querySelector('#modal-container');
+      if (e.key === 'Escape' && modalContainer.ClassList.contains('is-visible')){
+        hideModal();
+      }
+    }); 
+    modalContainer.addEventListener('click', (e) => {
+  let target = e.target;
+  if (target === modalContainer) {
+    hideModal();
+  }
+}); */
+}
+
+function hideModal(){
+  let modalContainer = document.querySelector('#modal-container');
+  modalContainer.classList.remove('is-visible');
 }
 
 document.querySelector('#show-modal').addEventListener('click', () => {
   showModal ('Modal title', 'This is the modal content!');
 });
+
