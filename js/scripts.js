@@ -1,7 +1,7 @@
 // Pokemon Repository List
 let pokemonRepository = (function () {
   let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
   function add(pokemon) {
       pokemonList.push(pokemon);
@@ -10,7 +10,7 @@ let pokemonRepository = (function () {
   function getAll() {
       return pokemonList;
   }
-  /// addListItem function
+  // insert pokemonList into Html
   function addListItem(pokemon) {
       let pokemonList = document.querySelector(".pokemon-list");
       let listPokemon = document.createElement("li");
@@ -20,14 +20,15 @@ let pokemonRepository = (function () {
       listPokemon.appendChild(button);
       pokemonList.appendChild(listPokemon);
       button.addEventListener("click", function(event) {
+        console.log(event)
         showDetails(pokemon);
       });
     }
 
   //loadList function
   function loadList() {
-    return fetch(apiUrl).then(function (response) {
-      return response.json();
+    return fetch(apiUrl).then(function (pok) {
+      return pok.json();
     }).then(function (json) {
       //json list includes 'result' as the whole array
       json.results.forEach(function (item) {
@@ -57,7 +58,7 @@ let pokemonRepository = (function () {
       });
     }
 
-   function showDetails(item){
+   function  showDetails(item){
       pokemonRepository.loadDetails(item).then(function(){
           console.log(item);
       });
@@ -88,6 +89,9 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
   showModal();
 })
 
+// defining modalContainer
+let modalContainer = document.querySelector('#modal-container');
+
   function showModal(title, text) {
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
@@ -98,6 +102,7 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
   let closeButtonElement = document.createElement('button');
   closeButtonElement.classList.add('modal-close');
   closeButtonElement.innerText='close';
+  closeButtonElement.addEventListener('click', hideModal)
 
     let titleElement = document.createElement('h1');
     titleElement.innerText = title;
@@ -110,13 +115,6 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
     modal.appendChild(contentElement);
     modalContainer.appendChild(modal);
 
-    
-
-  /*  let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
-    
     //close modal with escape button
     window.addEventListener('keydown', (e) =>{
       let modalContainer = document.querySelector('#modal-container');
@@ -129,7 +127,7 @@ document.querySelector('#show-modal').addEventListener('click', () =>{
   if (target === modalContainer) {
     hideModal();
   }
-}); */
+});
 }
 
 function hideModal(){
@@ -138,6 +136,6 @@ function hideModal(){
 }
 
 document.querySelector('#show-modal').addEventListener('click', () => {
-  showModal ('Modal title', 'This is the modal content!');
+  showModal ('This is the Modal Title', 'This is the modal content!');
 });
 
